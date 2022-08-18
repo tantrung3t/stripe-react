@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js"
 import axios from "axios"
 import React from "react"
 
-const PUBLIC_KEY = "pk_test_51LX0LLKBIaBSQ6dHZRldDqWEVWbN7kq1m8vzLUFwjrTh9LJ3hrqFkct6GaseCklmxdo5v3Rj9f7nI1LgN2AeyO4W00O1JFrFcF"
+const PUBLIC_KEY = "pk_test_51LX0LLKBIaBSQ6dHZRldDqW"
 
 const stripeTestPromise = loadStripe(PUBLIC_KEY)
 
