@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js"
 import axios from "axios"
 import React from "react"
 
-const PUBLIC_KEY = "pk_test_51LX0LLKBIaBSQ6dHZRldDqW"
+const PUBLIC_KEY = "pk_test_51LwkdaLc3WY2ZOgvSnVBN4aqdpeJ8H72iIuwf"
 
 const stripeTestPromise = loadStripe(PUBLIC_KEY)
 
@@ -23,11 +23,18 @@ function Payment() {
     const handlesubmit = async (e) => {
         e.preventDefault()
 
-        const response = await axios.post("http://localhost:8000/setup-intent/", {
-            amount: 1000,
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: "card",
+            card: elements.getElement(CardElement)
         })
-        console.log("Created payment")
-        console.log(response.data.client_secret)
+
+        console.log(paymentMethod)
+
+        // const response = await axios.post("http://localhost:8000/setup-intent/", {
+        //     amount: 1000,
+        // })
+        // console.log("Created payment")
+        // console.log(response.data.client_secret)
         
 
         // const confirmCardPayment = await stripe.confirmCardPayment(
@@ -45,16 +52,16 @@ function Payment() {
         
 
 
-        const confirmCardSetup = await stripe.confirmCardSetup(
-            response.data.client_secret, {
-                payment_method: {
-                    card: elements.getElement(CardElement),
-                },
-            })
-            .then(function (result) {
-                console.log(result)
-            });
-        console.log(confirmCardSetup) 
+        // const confirmCardSetup = await stripe.confirmCardSetup(
+        //     response.data.client_secret, {
+        //         payment_method: {
+        //             card: elements.getElement(CardElement),
+        //         },
+        //     })
+        //     .then(function (result) {
+        //         console.log(result)
+        //     });
+        // console.log(confirmCardSetup) 
     }
     return (
         <>
